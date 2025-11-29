@@ -26,8 +26,10 @@ const areaEl = document.querySelector("#area");
 const inputEl = document.querySelector("#country-input");
 const btnEl = document.querySelector("#search-btn");
 
-btnEl.onclick = function () {
-  fetch("https://restcountries.com/v3.1/name/" + inputEl.value.trim())
+btnEl.addEventListener("click", () => {
+  const countryName = inputEl.value.trim();
+
+  fetch("https://restcountries.com/v3.1/name/" + countryName)
     .then((response) => response.json())
     .then((data) => {
       capitalEl.textContent = data[0].capital[0];
@@ -37,7 +39,7 @@ btnEl.onclick = function () {
       capitalEl.textContent = "Wrong name";
       areaEl.textContent = "-";
     });
-};
+});
 
 // клік за межами
 window.addEventListener("click", (event) => {
